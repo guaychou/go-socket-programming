@@ -9,9 +9,9 @@ This is examples of implementation socket programming with golang using net libr
 | Nim | String |    Identifier of each Student |
 
 ## Screenshot
-###Client<br>
+### Client<br>
 ![Client](images/client.png)<br>
 From the image above: *client* send the data
-###Server<br>
+### Server<br>
 ![Server](images/server.png)<br>
 From the image above: *server* print the data
