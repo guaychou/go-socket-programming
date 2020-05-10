@@ -24,7 +24,7 @@ func main(){
 		Nim: nim,
 	}
 	jsonText,err:=json.Marshal(text)
-		conn.Write(jsonText)
+	conn.Write(jsonText)
 }
 
 func input()(string,string){
