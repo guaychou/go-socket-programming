@@ -59,10 +59,21 @@ func handleConnection(conn net.Conn) error {
 	if err!=nil{
 		return err
 	}
+	printData(&data)
 	fmt.Println("======================= DATA =============================")
 	fmt.Println("Nama Mahasiswa: ", data.Message[0].Nama)
 	fmt.Println("Nim Mahasiswa: ", data.Message[0].Nim)
 	fmt.Println("ID client: ", data.Message[0].Id)
 	fmt.Println("======================== END =============================\n")
 	return nil
+}
+
+func printData(data *models.MessageArray){
+	for _,value:=range(data.Message){
+		fmt.Println("======================= DATA =============================")
+		fmt.Println("Nama Mahasiswa: ", value.Nama)
+		fmt.Println("Nim Mahasiswa: ", value.Nim)
+		fmt.Println("ID client: ", value.Id)
+		fmt.Println("======================== END =============================\n")
+	}
 }
