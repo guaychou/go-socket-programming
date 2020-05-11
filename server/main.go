@@ -60,11 +60,6 @@ func handleConnection(conn net.Conn) error {
 		return err
 	}
 	printData(&data)
-	fmt.Println("======================= DATA =============================")
-	fmt.Println("Nama Mahasiswa: ", data.Message[0].Nama)
-	fmt.Println("Nim Mahasiswa: ", data.Message[0].Nim)
-	fmt.Println("ID client: ", data.Message[0].Id)
-	fmt.Println("======================== END =============================\n")
 	return nil
 }
 
