@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"encoding/json"
+	"github.com/guaychou/go-socket-programming/config"
 	"log"
 	"math/rand"
 	"net"
@@ -13,18 +14,27 @@ import (
 )
 
 func main(){
-	conn, err := net.Dial("tcp", "127.0.0.1:8080")
+	message:=models.MessageArray{}
+	conn, err := net.Dial("tcp", "127.0.0.1"+config.SERVER_PORT)
 	if err != nil {
 		log.Fatal("Server not found")
 	}
-	nama,nim:=input()
-	text:=models.Message{
-		Id: randomInt(1,101),
-		Nama: nama,
-		Nim: nim,
+	for {
+		nama,nim:=input()
+		text:=models.Data{
+			Id: randomInt(1,501),
+			Nama: nama,
+			Nim: nim,
+		}
+		message.AddMessage(text)
+		jsonText,err:=json.Marshal(message)
+		if err!=nil{
+			log.Fatal(err)
+		}
+		jsonText=append(jsonText,0x0A)
+		conn.Write(jsonText)
+		message.Message=nil
 	}
-	jsonText,err:=json.Marshal(text)
-	conn.Write(jsonText)
 }
 
 func input()(string,string){
