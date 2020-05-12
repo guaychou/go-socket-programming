@@ -24,10 +24,8 @@ func init (){
 }
 func main(){
 	message:=models.MessageArray{}
-	conn, err := dialServer()
-	if err != nil {
-		log.Fatal("Server not found")
-	}
+	conn := dialServer()
+
 	for {
 		nama,nim:=input()
 		text:=models.Data{
@@ -46,7 +44,7 @@ func main(){
 	}
 }
 
-func dialServer()(net.Conn,error){
+func dialServer()(net.Conn){
 	conn,err:=net.Dial("tcp", "127.0.0.1"+config.SERVER_PORT)
 	if err!=nil{
 		log.WithFields(log.Fields{
@@ -59,7 +57,12 @@ func dialServer()(net.Conn,error){
 		time.Sleep(5 * time.Second)
 		return dialServer()
 	}
-	return conn,err
+	if conn!=nil{
+		log.WithFields(log.Fields{
+			"Status":"Up",
+		}).Info("Connected to Server")
+	}
+	return conn
 }
 
 func input()(string,string){
