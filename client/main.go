@@ -62,6 +62,7 @@ func dialServer()(net.Conn){
 			"Status":"Up",
 		}).Info("Connected to Server")
 	}
+	timer=0
 	return conn
 }
 
