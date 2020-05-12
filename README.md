@@ -10,11 +10,11 @@ This is examples of implementation socket programming with golang using net libr
 
 ## Screenshot
 ### Client<br>
-![Client](images/client.png)<br>
+![Client](images/client1.png)<br>
 From the image above: *client* send the data
 
 ![Client server check](images/client-server-if-not-reachable.png)<br>
 If server not reachable for 5 times, the client will be exited.
 ### Server<br>
-![Server](images/server.png)<br>
+![Server](images/server1.png)<br>
 From the image above: *server* print the data
