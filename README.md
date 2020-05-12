@@ -10,15 +10,20 @@ This is examples of implementation socket programming with golang using net libr
 
 ## Screenshot
 ### Client<br>
-
-<img align="center" width="668" height="427" src="images/client1.png">
-<br><br>
 <p align="center">
-From the image above: *client* send the data<br><br>
-</p> 
+  <img src="images/client1.png" width="668" height="427" alt="Client" title="Client"></a>
+  <br>
+<strong><i>Client</i> send the data</strong>
+<br><br>
+  <img src="images/client-server-if-not-reachable.png" width="668" height="427" alt="Client-1" title="Client-1"></a>
+  <br>
+  <Strong>If server not reachable for 5 times, the client will be exited. </strong>
+</p>
 
-![Client server check](images/client-server-if-not-reachable.png)<br>
-If server not reachable for 5 times, the client will be exited.
 ### Server<br>
 ![Server](images/server1.png)<br>
-From the image above: *server* print the data
+<p align="center">
+  <img src="images/client1.png" width="668" height="427" alt="Server" title="Server"></a>
+  <br>
+<strong><i>Server</i> get the data</strong>
+</p>
