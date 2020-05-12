@@ -14,6 +14,14 @@ import (
 	"syscall"
 )
 
+func init (){
+	log.SetLevel(log.DebugLevel)
+	log.SetFormatter(&log.TextFormatter{
+		DisableColors: true,
+		FullTimestamp: true,
+	})
+}
+
 func main(){
 	done:=make(chan os.Signal,1)
 	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
@@ -29,13 +37,17 @@ func main(){
 			if err != nil {
 				log.Fatal(err)
 			}
-			log.Info("New client connected: "+conn.RemoteAddr().String())
+			log.WithFields(log.Fields{
+				"Address":conn.RemoteAddr(),
+			}).Info("Client connected")
 			go func() {
 				for  {
 					err:=handleConnection(conn) // Handling Connection
 					if err!=nil{
 						if err==io.EOF{
-							log.Info("Client disconeected: "+ conn.RemoteAddr().String())
+							log.WithFields(log.Fields{
+								"Address":conn.RemoteAddr(),
+							}).Info("Client disconnected")
 							break
 						}
 						log.Fatal(err)

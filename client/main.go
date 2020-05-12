@@ -4,18 +4,27 @@ import (
 	"bufio"
 	"encoding/json"
 	"github.com/guaychou/go-socket-programming/config"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"math/rand"
 	"net"
 	"github.com/guaychou/go-socket-programming/models"
 	"os"
 	"fmt"
 	"strings"
+	"time"
 )
+var timer int = 0
 
+func init (){
+	log.SetLevel(log.DebugLevel)
+	log.SetFormatter(&log.TextFormatter{
+		DisableColors: true,
+		FullTimestamp: true,
+	})
+}
 func main(){
 	message:=models.MessageArray{}
-	conn, err := net.Dial("tcp", "127.0.0.1"+config.SERVER_PORT)
+	conn, err := dialServer()
 	if err != nil {
 		log.Fatal("Server not found")
 	}
@@ -35,6 +44,22 @@ func main(){
 		conn.Write(jsonText)
 		message.Message=nil
 	}
+}
+
+func dialServer()(net.Conn,error){
+	conn,err:=net.Dial("tcp", "127.0.0.1"+config.SERVER_PORT)
+	if err!=nil{
+		log.WithFields(log.Fields{
+			"Status":"Down",
+		}).Info("Server is not reachable")
+		if timer==5{
+			log.Fatal("Server down, Exiting . . . ")
+		}
+		timer++
+		time.Sleep(5 * time.Second)
+		return dialServer()
+	}
+	return conn,err
 }
 
 func input()(string,string){
